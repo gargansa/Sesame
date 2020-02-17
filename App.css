@@ -1,0 +1,8 @@
+.center{
+      flex: 1;
+      background-color: '#000';
+      border: black;
+      align-items: 'center';
+      justify-content: 'center';
+      text-align: center;
+    }

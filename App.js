@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
 import Nav from './Nav/Nav.js';
-
+import './App.css';
 class App extends Component {
   state = {//initialize state
-    title:"Sesame"
+    title: "Sesame"
   }
   constructor() {
     super()
     console.log('Constructor Called')
     //this.state.color.s = this.randomColor()//chooses the random color happens before the component is displayed
-
-    
   }
 
   componentDidMount() {
@@ -33,10 +31,12 @@ class App extends Component {
     console.log('render Called')
 
     return (
-      <div>
-        <Nav title={this.state.title}/>
+      <div className="center">
+        <Nav title={this.state.title} />
       </div>
     );
+
+
   }
 
 
@@ -54,3 +54,5 @@ class App extends Component {
 }
 
 export default App;
+
+
