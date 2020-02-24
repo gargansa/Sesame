@@ -5,13 +5,21 @@
     text-align: center;
     flex: 1;
 }
+.buttonRow{
+    display: flex;
+    /* margin: 5px; */
+}
+.buttons{
+    margin-top: 20px;
+}
 .center{
     justify-content: 'center';
     border: 5px blue solid;
-      background-color: '#000';
-      border: black;
-      width: 40%;
-    }
+    background-color: '#000';
+    border: black;
+    width: 40%;
+}
+
 button{
     display: inline-block;
     border: none;

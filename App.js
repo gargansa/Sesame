@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Header, ThemeProvider, ListItem } from 'react-native-elements';
-import TouchableScale from 'react-native-touchable-scale';
-// import LinearGradient from 'react-native-linear-gradient'; 
+import { Header, Button } from 'react-native-elements';
 
 
 
@@ -10,118 +8,15 @@ class App extends Component {
   state = {//initialize state
     title: "Sesame",
 
-    list: [
-      {
-        name: 'A',
-        quantity: '5',
-      },
-      {
-        name: 'B',
-        quantity: '1',
-      },
-      {
-        name: 'C',
-        quantity: '1',
-      },
-      {
-        name: 'D',
-        quantity: '3',
-      },
-      {
-        name: 'E',
-        quantity: '1',
-      },
-      {
-        name: 'F',
-        quantity: '1',
-      },
-      {
-        name: 'G',
-        quantity: '2',
-      },
-      {
-        name: 'H',
-        quantity: '1',
-      },
-      {
-        name: 'I',
-        quantity: '1',
-      },
-      {
-        name: 'J',
-        quantity: '1',
-      },
-      {
-        name: 'K',
-        quantity: '1',
-      },
-      {
-        name: 'L',
-        quantity: '1',
-      },
-      {
-        name: 'M',
-        quantity: '1',
-      },
-      {
-        name: 'N',
-        quantity: '1',
-      },
-      {
-        name: 'O',
-        quantity: '1',
-      },
-      {
-        name: 'P',
-        quantity: '1',
-      },
-      {
-        name: 'Q',
-        quantity: '1',
-      },
-      {
-        name: 'R',
-        quantity: '1',
-      },
-      {
-        name: 'S',
-        quantity: '1',
-      },
-      {
-        name: 'T',
-        quantity: '1',
-      },
-      {
-        name: 'U',
-        quantity: '1',
-      },
-      {
-        name: 'V',
-        quantity: '1',
-      },
-      {
-        name: 'W',
-        quantity: '1',
-      },
-      {
-        name: 'X',
-        quantity: '1',
-      },
-      {
-        name: 'Y',
-        quantity: '1',
-      },
-      {
-        name: 'Z',
-        quantity: '1',
-      },
-    ]
   }
   constructor() {
     super()
     console.log('Constructor Called')
-
+    this.state.input = ''
     //this.state.color.s = this.randomColor()//chooses the random color happens before the component is displayed
+    this.nextInput = this.nextInput.bind(this)
+    this.submitPin = this.submitPin.bind(this)
+    this.clearPin = this.clearPin.bind(this)
   }
 
   componentDidMount() {
@@ -132,18 +27,28 @@ class App extends Component {
     ))
   }
 
-  componentWillUpdate() {
-    console.log('componentWillUpdate Called')
+
+  nextInput(value) {
+    this.setState({ input: this.state.input += value });
+    console.log(this.state.input)
   }
 
-  componentDidUpdate() {
-    console.log('componentDidUpdate Called')
+  clearPin() {
+    this.setState({ input: this.state.input = '' });
+    console.log('pin cleared')
   }
+
+  submitPin() {
+    
+    console.log('pin submitted')
+    this.clearPin()
+  }
+
 
   render() {
-    console.log('render Called')
 
     return (
+
       <div className="container">
         <div className="center">
           <Header
@@ -151,18 +56,79 @@ class App extends Component {
             centerComponent={{ text: 'Sesame', style: { color: '#fff' } }}
             rightComponent={{ icon: 'home', color: '#fff' }}
           />
-
-          {
-            this.state.list.map((l, i) => (
-              <ListItem
-                key={i}
-                title={l.name}
-                badge={{ value: l.quantity, textStyle: { color: 'orange' } }}
-                chevron
-                bottomDivider
+          <div className="buttons">
+            <div className="buttonRow">
+              <Button
+                title="1"
+                containerStyle={{ width: '33%', margin: '1px' }}
+                onPress={() => this.nextInput('1')}
               />
-            ))
-          }
+              <Button
+                title="2"
+                containerStyle={{ width: '33%', margin: '1px' }}
+                onPress={() => this.nextInput('2')}
+              />
+              <Button
+                title="3"
+                containerStyle={{ width: '33%', margin: '1px' }}
+                onPress={() => this.nextInput('3')}
+              />
+            </div>
+
+            <div className="buttonRow">
+              <Button
+                title="4"
+                containerStyle={{ width: '33%', margin: '1px' }}
+                onPress={() => this.nextInput('4')}
+              />
+              <Button
+                title="5"
+                containerStyle={{ width: '33%', margin: '1px' }}
+                onPress={() => this.nextInput('5')}
+              />
+              <Button
+                title="6"
+                containerStyle={{ width: '33%', margin: '1px' }}
+                onPress={() => this.nextInput('6')}
+              />
+            </div>
+
+            <div className="buttonRow">
+              <Button
+                title="7"
+                containerStyle={{ width: '33%', margin: '1px' }}
+                onPress={() => this.nextInput('7')}
+              />
+              <Button
+                title="8"
+                containerStyle={{ width: '33%', margin: '1px' }}
+                onPress={() => this.nextInput('8')}
+              />
+              <Button
+                title="9"
+                containerStyle={{ width: '33%', margin: '1px' }}
+                onPress={() => this.nextInput('9')}
+              />
+            </div>
+
+            <div className="buttonRow">
+              <Button
+                title="Clear"
+                containerStyle={{ width: '33%', margin: '1px' }}
+                onPress={() => this.clearPin()}
+              />
+              <Button
+                title="0"
+                containerStyle={{ width: '33%', margin: '1px' }}
+                onPress={() => this.nextInput('0')}
+              />
+              <Button
+                title="Enter"
+                containerStyle={{ width: '33%', margin: '1px' }}
+                onPress={() => this.submitPin()}
+              />
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -170,20 +136,6 @@ class App extends Component {
 
   }
 
-
-
-
-
-  //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Functions that are not lifecycle
-  functionToSetState(value) {
-    this.setState(previousState => ({
-      title: value
-    }
-    ))
-  }
-
 }
 
-export default App;
-
-
+export default App
