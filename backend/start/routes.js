@@ -16,9 +16,8 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-Route.post('/createUser', "UserController.createUser") //create user 
-Route.get('/getUser', "UserController.getUser") //read user (needs auth)
-Route.put('/updateUser', "UserController.updateUser") //update user (needs auth)
-Route.delete('/deleteUser', "UserController.deleteUser") //delete user (needs auth)
-Route.post('/loginUser', "UserController.login")
-Route.put('updateUserPicture', "UserController.updateUserProfile")
+Route.post('/create', "UserController.createUser") //create user 
+//Route.get('/getUser', "UserController.getUser") //read user (needs auth)
+//Route.put('/updateUser', "UserController.updateUser") //update user (needs auth)
+//Route.delete('/deleteUser', "UserController.deleteUser") //delete user (needs auth)
+
