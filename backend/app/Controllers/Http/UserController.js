@@ -7,7 +7,6 @@ class UserController {
 
      async updateUserProfile({request,response,auth}){
          try{
-             let {image_url} = request.all()
              let user = await auth.getUser()
              await user.save()
              response.send(user)
@@ -18,7 +17,7 @@ class UserController {
 
 
     async createUser({ request, auth, response }) {
-      const {first_name, last_name, username, email, password, zipcode, image_url}=request.post()
+      const {username, password }=request.post()
         let user = await User.create(
             {
                 username,
@@ -51,7 +50,7 @@ class UserController {
             let user = await auth.getUser()
 
            
-            const {first_name,last_name, username,password, zipcode, email, image_url} = request.post()
+            const {username,password} = request.post()
             user.username = username
             user.password = password
             await user.save()
