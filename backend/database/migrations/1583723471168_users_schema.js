@@ -20,7 +20,3 @@ class UsersSchema extends Schema {
 
 module.exports = UsersSchema
 
-'use strict'
-
-/** @type {import('@adonisjs/lucid/src/Schema')} */
-const Schema = use('Schema')
