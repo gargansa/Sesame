@@ -17,7 +17,7 @@
 const Route = use('Route')
 
 Route.post('/create', "UserController.createUser") //create user 
-//Route.get('/getUser', "UserController.getUser") //read user (needs auth)
+Route.get('/login', "UserController.loginUser") //read user (needs auth)
 //Route.put('/updateUser', "UserController.updateUser") //update user (needs auth)
 //Route.delete('/deleteUser', "UserController.deleteUser") //delete user (needs auth)
 
