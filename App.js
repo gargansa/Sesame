@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Header, Button } from 'react-native-elements';
-
+import AsyncStorage from '@react-native-community/async-storage';
+import * as Crypto from 'expo-crypto';
 
 
 class App extends Component {
@@ -17,14 +18,10 @@ class App extends Component {
     this.nextInput = this.nextInput.bind(this)
     this.submitPin = this.submitPin.bind(this)
     this.clearPin = this.clearPin.bind(this)
-  }
-
-  componentDidMount() {
-    //perfect place to set state runs once after component is built
-    this.setState(previousState => ({
-      //set state function
-    }
-    ))
+    this.saveData = this.saveData.bind(this)
+    this.getAllData = this.getAllData.bind(this)
+    this.getData = this.getData.bind(this)
+    this.removeData = this.removeData.bind(this)
   }
 
 
@@ -39,11 +36,53 @@ class App extends Component {
   }
 
   submitPin() {
-    
+    //console.log(encrypt('hashtag', this.state.input))
+    this.saveData('pin', this.state.input);
     console.log('pin submitted')
+    this.getData('pin')
     this.clearPin()
   }
 
+  saveData = async (key, value) => {
+    try {
+      await AsyncStorage.setItem(key, value);
+      this.getAllData();
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  getAllData = () => {
+    AsyncStorage.getAllKeys().then((keys) => {
+      return AsyncStorage.multiGet(keys)
+        .then((result) => {
+          console.log(result);
+        }).catch((e) => {
+          console.log(e);
+        });
+    });
+  }
+
+  getData = async (key) => {
+    try {
+      const value = await AsyncStorage.getItem(key)
+      if (value !== null) {
+        console.log(value)
+      }
+    } catch (e) {
+      // error reading value
+    }
+  }
+
+
+  removeData = async (key) => {
+    try {
+      await AsyncStorage.removeItem(key)
+    } catch (e) {
+      // remove error
+    }
+    console.log('Done.')
+  }
 
   render() {
 
@@ -130,6 +169,7 @@ class App extends Component {
             </div>
           </div>
         </div>
+
       </div>
     );
 
@@ -139,3 +179,12 @@ class App extends Component {
 }
 
 export default App
+
+
+
+
+
+
+
+
+
