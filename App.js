@@ -208,16 +208,11 @@ class Renderer extends Component{
     decrypt: PropTypes.func.isRequired,
   }
 
-
-
   render(){
     let encryptedText = this.context.encrypt("Test");
     let decryptedText = this.context.decrypt(encryptedText);
 
-
     return <div>
-
-
         <textarea
           style={{
             width: "100%",
@@ -235,9 +230,7 @@ class Renderer extends Component{
           value={decryptedText || ""}
           disabled
         />
-
     </div>
-
   }
 }
 
