@@ -8,11 +8,6 @@ import ReactEncrypt from 'react-encrypt'
 
 
 class App extends Component {
-
-  static contextTypes = {
-    encrypt: PropTypes.func.isRequired,
-    decrypt: PropTypes.func.isRequired,
-  }
   state = {//initialize state
     title: "Sesame",
 
@@ -95,11 +90,6 @@ class App extends Component {
 
   render() {
 
-    const {
-      encrypt,
-      decrypt,
-    } = this.context;
-    //console.log(encrypt("example"))
 
     return (
 
@@ -185,14 +175,11 @@ class App extends Component {
             </div>
           </div>
         </div>
-        <ReactEncrypt encryptKey={"ewfWE@#%$rfdsefgdsf"}><Renderer /></ReactEncrypt>
+        <ReactEncrypt encryptKey={"encryptingkeyhash"}><Renderer /></ReactEncrypt>
       </div>
 
     );
-
-
   }
-
 }
 
 export default App
@@ -202,11 +189,11 @@ export default App
 
 
 class Renderer extends Component{
-
   static contextTypes = {
     encrypt: PropTypes.func.isRequired,
     decrypt: PropTypes.func.isRequired,
   }
+  
 
   render(){
     let encryptedText = this.context.encrypt("Test");
@@ -214,21 +201,11 @@ class Renderer extends Component{
 
     return <div>
         <textarea
-          style={{
-            width: "100%",
-            height: 100,
-          }}
           value={encryptedText || ""}
-          disabled
         />
 
         <textarea
-          style={{
-            width: "100%",
-            height: 100,
-          }}
           value={decryptedText || ""}
-          disabled
         />
     </div>
   }
