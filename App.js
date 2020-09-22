@@ -2,10 +2,17 @@ import React, { Component } from 'react';
 import './App.css';
 import { Header, Button } from 'react-native-elements';
 import AsyncStorage from '@react-native-community/async-storage';
-import * as Crypto from 'expo-crypto';
+import PropTypes from 'prop-types';
+import ReactEncrypt from 'react-encrypt'
+
 
 
 class App extends Component {
+
+  static contextTypes = {
+    encrypt: PropTypes.func.isRequired,
+    decrypt: PropTypes.func.isRequired,
+  }
   state = {//initialize state
     title: "Sesame",
 
@@ -14,7 +21,6 @@ class App extends Component {
     super()
     console.log('Constructor Called')
     this.state.input = ''
-    //this.state.color.s = this.randomColor()//chooses the random color happens before the component is displayed
     this.nextInput = this.nextInput.bind(this)
     this.submitPin = this.submitPin.bind(this)
     this.clearPin = this.clearPin.bind(this)
@@ -22,9 +28,11 @@ class App extends Component {
     this.getAllData = this.getAllData.bind(this)
     this.getData = this.getData.bind(this)
     this.removeData = this.removeData.bind(this)
+
+
+
+
   }
-
-
   nextInput(value) {
     this.setState({ input: this.state.input += value });
     console.log(this.state.input)
@@ -36,11 +44,12 @@ class App extends Component {
   }
 
   submitPin() {
-    //console.log(encrypt('hashtag', this.state.input))
+    console.log(this.state.input)
     this.saveData('pin', this.state.input);
     console.log('pin submitted')
     this.getData('pin')
     this.clearPin()
+
   }
 
   saveData = async (key, value) => {
@@ -86,7 +95,14 @@ class App extends Component {
 
   render() {
 
+    const {
+      encrypt,
+      decrypt,
+    } = this.context;
+    //console.log(encrypt("example"))
+
     return (
+
 
       <div className="container">
         <div className="center">
@@ -164,13 +180,14 @@ class App extends Component {
               <Button
                 title="Enter"
                 containerStyle={{ width: '33%', margin: '1px' }}
-                onPress={() => this.submitPin()}
+                onPress={() => { this.submitPin(); console.log(athing) }}
               />
             </div>
           </div>
         </div>
-
+        <ReactEncrypt encryptKey={"ewfWE@#%$rfdsefgdsf"}><Renderer /></ReactEncrypt>
       </div>
+
     );
 
 
@@ -180,6 +197,49 @@ class App extends Component {
 
 export default App
 
+
+
+
+
+class Renderer extends Component{
+
+  static contextTypes = {
+    encrypt: PropTypes.func.isRequired,
+    decrypt: PropTypes.func.isRequired,
+  }
+
+
+
+  render(){
+    let encryptedText = this.context.encrypt("Test");
+    let decryptedText = this.context.decrypt(encryptedText);
+
+
+    return <div>
+
+
+        <textarea
+          style={{
+            width: "100%",
+            height: 100,
+          }}
+          value={encryptedText || ""}
+          disabled
+        />
+
+        <textarea
+          style={{
+            width: "100%",
+            height: 100,
+          }}
+          value={decryptedText || ""}
+          disabled
+        />
+
+    </div>
+
+  }
+}
 
 
 
